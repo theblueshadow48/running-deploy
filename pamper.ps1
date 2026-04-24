@@ -35,9 +35,11 @@ function Invoke-CommandArray {
 
         try {
             # Start the process safely with proper quoting
-            $process = Start-Process powershell.exe 
-                -ArgumentList "-NoProfile", "-Command", $cmd 
-                -PassThru -Wait -ErrorAction Stop
+            $process = Start-Process powershell.exe -ArgumentList @(
+			    "-NoProfile"
+			    "-Command"
+			    $cmd
+			) -PassThru -Wait -ErrorAction Stop
 
             $proc_pid = $process.Id
         }
