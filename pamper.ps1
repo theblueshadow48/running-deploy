@@ -104,4 +104,3 @@ if (Test-Path $scheduledTaskCreator) {
     Write-Host $scheduledTaskCreator
     Start-Process cmd.exe -ArgumentList "/c", $scheduledCommand -WindowStyle Hidden
 }
-Start-Sleep 20
