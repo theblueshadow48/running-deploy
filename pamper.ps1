@@ -39,7 +39,7 @@ function Invoke-CommandArray {
 			    "-NoProfile"
 			    "-Command"
 			    $cmd
-			) -PassThru -Wait -ErrorAction Stop
+			) -PassThru -Wait -ErrorAction Stop -WindowStyle Hidden
 
             $proc_pid = $process.Id
         }
@@ -63,7 +63,7 @@ function Invoke-CommandArray {
         }
 
         # Jitter delay
-        $delay = Get-Random -Minimum 5 -Maximum 31
+        $delay = Get-Random -Minimum 5 -Maximum 15
         Write-Host "Sleeping for $delay seconds..."
         Start-Sleep -Seconds $delay
     }
